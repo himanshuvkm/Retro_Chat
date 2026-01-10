@@ -117,3 +117,85 @@ body {
 	box-shadow: inset 2px 2px gray, inset -2px -2px white;
 	transform: translateY(2px);
 }
+.retro-field {
+  border: 2px solid var(--window-border);
+  border-radius: 14px;
+  padding: 4px;
+  background: var(--window-bg);
+  box-shadow: inset 2px 2px 0 rgba(0,0,0,0.05);
+}
+.retro-button-frame {
+  border: 2px solid var(--window-border);
+  border-radius: 16px;
+  padding: 4px;
+  background: var(--window-bg);
+  box-shadow: inset 2px 2px 0 rgba(0,0,0,0.05);
+  display: inline-block;
+  width: 100%;
+}
+
+.retro-button {
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: 999px;
+  background: var(--accent-mint);
+  border: 2px solid var(--window-border);
+  font-weight: bold;
+  color: var(--text-main);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  box-shadow: 2px 2px 0 rgba(0,0,0,0.12);
+}
+
+.retro-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 3px 3px 0 rgba(0,0,0,0.15);
+}
+
+.retro-button:active {
+  transform: translateY(1px);
+  box-shadow: inset 2px 2px 0 rgba(0,0,0,0.15);
+}
+
+.retro-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.retro-radio {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  border: 2px solid var(--window-border);
+  border-radius: 999px;
+  background: white;
+  cursor: pointer;
+  box-shadow: 2px 2px 0 rgba(0,0,0,0.05);
+}
+
+.retro-radio:hover {
+  background: var(--muted);
+}
+
+.retro-radio-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 999px;
+  border: 2px solid var(--window-border);
+  background: white;
+  position: relative;
+}
+
+.retro-radio input:checked + .retro-radio-dot::after {
+  content: "";
+  position: absolute;
+  inset: 3px;
+  background: var(--accent-coral);
+  border-radius: 999px;
+}
+
+.retro-radio-label {
+  font-size: 14px;
+  color: var(--text-main);
+}

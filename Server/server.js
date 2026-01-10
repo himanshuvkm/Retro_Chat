@@ -12,9 +12,15 @@ dotenv.config();
 const __dirname = path.resolve();
 const Port = process.env.PORT || 5000;
 
+import cors from "cors";
+
 // ---------------------- Middlewares ----------------------
 app.use(express.json());
 app.use(cookieParser());
+app.use(cors({
+  origin: ["http://localhost:5173", process.env.CLIENT_URL], // Allow local dev and production client
+  credentials: true
+}));
 
 // ---------------------- DB Connect -----------------------
 connecttoDb();

@@ -3,86 +3,81 @@ import { Link } from "react-router-dom";
 import useLogin from "../../Hooks/useLogin";
 
 const Login = () => {
-    const [username, setUsername] = useState("");
-    const [password, setPassword] = useState("");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
 
-    const {loading, login} = useLogin();
+  const { loading, login } = useLogin();
 
-    const handleSubmit = async(e) => {
-        e.preventDefault();
-        await login(username, password);
-    };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    await login(username, password);
+  };
 
-  return (
-    <div className="flex min-h-screen w-100 flex-col items-center justify-center px-4">
-      <div className="w-full max-w-md p-8 rounded-xl shadow-lg bg-white border border-gray-200">
-        <h1 className="text-3xl font-bold text-center text-gray-900 mb-2">
-          Welcome Back
-        </h1>
-        <p className="text-center text-gray-500 text-sm mb-6">
-          Sign in to continue to ChatApp
+return (
+  <div className="min-h-screen w-full bg-[var(--desktop-bg)] flex items-center justify-center">
+    <div className="retro-window w-[420px] bg-[var(--window-bg)]">
+      
+      {/* Window Header */}
+      <div className="window-header">
+        <span>🔐 Login</span>
+        <div className="window-dots">
+          <span className="dot bg-red-400"></span>
+          <span className="dot bg-yellow-400"></span>
+          <span className="dot bg-green-400"></span>
+        </div>
+      </div>
+
+      {/* Body */}
+      <div className="p-6 space-y-4">
+        <h2 className="text-xl font-bold text-[var(--text-main)]">
+          Welcome back 👋
+        </h2>
+        <p className="text-sm text-[var(--text-muted)]">
+          Enter your credentials to access Chat_OS
         </p>
 
-        <form onSubmit={handleSubmit} className="space-y-5">
-          {/* Username */}
-          <div>
-            <label className="block mb-1.5 text-sm font-medium text-gray-700">
-              Username
-            </label>
-            <input
-              type="text"
-              placeholder="Enter your username"
-              className="w-full rounded-lg border border-gray-300 bg-white text-gray-900 h-11 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
-              required
-              aria-label="Username"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-            />
-          </div>
+        <form onSubmit={handleSubmit} className="space-y-4">
 
-          {/* Password */}
-          <div>
-            <label className="block mb-1.5 text-sm font-medium text-gray-700">
-              Password
-            </label>
-            <input
-              type="password"
-              placeholder="Enter your password"
-              className="w-full rounded-lg border border-gray-300 bg-white text-gray-900 h-11 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
-              required
-              aria-label="Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </div>
+          <input
+            type="text"
+            placeholder="Username"
+            className="retro-field w-full"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            required
+          />
 
-          {/* Submit button */}
+          <input
+            type="password"
+            placeholder="Password"
+            className="retro-field w-full"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+
           <button
             type="submit"
-            className="w-full h-11 rounded-lg bg-blue-600 text-white font-medium shadow-sm hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            className="retro-button w-full"
             disabled={loading}
           >
-            {loading ? (
-              <span className="inline-block w-5 h-5 border-2 border-t-transparent border-white rounded-full animate-spin"></span>
-            ) : (
-              "Sign In"
-            )}
+            {loading ? "Logging in..." : "Enter Chat"}
           </button>
 
-          {/* Link to Signup */}
-          <p className="text-sm text-gray-600 text-center pt-2">
-            Don't have an account?{" "}
-            <Link
-              to="/signup"
-              className="text-blue-600 font-medium hover:text-blue-700 transition-colors"
-            >
-              Sign up
+          <p className="text-sm text-center text-[var(--text-muted)]">
+            Don’t have an account?{" "}
+            <Link to="/signup" className="retro-link">
+              Create one
             </Link>
           </p>
+
         </form>
       </div>
     </div>
-  );
+  </div>
+);
+
+
 };
 
 export default Login;

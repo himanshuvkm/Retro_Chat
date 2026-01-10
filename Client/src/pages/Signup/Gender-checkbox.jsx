@@ -1,36 +1,42 @@
 const GenderCheckbox = ({ onChangebox, selectedGender }) => {
   return (
-    <div>
-      <label className="block mb-2 text-sm font-medium text-gray-700">
+    <div className="space-y-2">
+      <label className="text-xs uppercase tracking-widest text-[var(--text-muted)]">
         Gender
       </label>
-      <div className="flex gap-4">
-        <label className="flex items-center gap-2 cursor-pointer">
+
+      <div className="flex gap-3">
+
+        {/* Male */}
+        <label className="retro-radio">
           <input
             type="radio"
             name="gender"
             value="male"
-            className="w-4 h-4 text-blue-600 border-gray-300 focus:ring-2 focus:ring-blue-500"
-            required
-            aria-label="Male"
             checked={selectedGender === "male"}
             onChange={() => onChangebox("male")}
+            required
+            className="hidden"
           />
-          <span className="text-sm text-gray-700">Male</span>
+          <span className="retro-radio-dot"></span>
+          <span className="retro-radio-label">Male</span>
         </label>
-        <label className="flex items-center gap-2 cursor-pointer">
+
+        {/* Female */}
+        <label className="retro-radio">
           <input
             type="radio"
             name="gender"
             value="female"
-            className="w-4 h-4 text-blue-600 border-gray-300 focus:ring-2 focus:ring-blue-500"
-            required
-            aria-label="Female"
             checked={selectedGender === "female"}
             onChange={() => onChangebox("female")}
+            required
+            className="hidden"
           />
-          <span className="text-sm text-gray-700">Female</span>
+          <span className="retro-radio-dot"></span>
+          <span className="retro-radio-label">Female</span>
         </label>
+
       </div>
     </div>
   );

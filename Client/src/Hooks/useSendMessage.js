@@ -1,7 +1,7 @@
 import { toast } from "react-hot-toast";
 import { useState } from "react";
 import useConverstation from "../zustand/useconversation";
-
+ const API_BASE = import.meta.env.VITE_API_URL;
 const useSendMessage = () => {
     const [loading, setLoading] = useState(false);
     const { messages, setMessages, selectedConversation } = useConverstation();
@@ -19,11 +19,12 @@ const useSendMessage = () => {
 
             const isGroup = selectedConversation.isGroup;
             const endpoint = isGroup
-                ? `/api/message/group/send/${selectedConversation._id}`
-                : `/api/message/send/${selectedConversation._id}`;
+                ? `${API_BASE}/api/message/group/send/${selectedConversation._id}`
+                : `${API_BASE}/api/message/send/${selectedConversation._id}`;
 
             const res = await fetch(endpoint, {
                 method: "POST",
+                credentials: "include",
                 headers: {
                     "Content-Type": "application/json",
                 },

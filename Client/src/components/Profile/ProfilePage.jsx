@@ -1,4 +1,5 @@
 import React, { useState, useRef } from 'react';
+export const API_BASE = import.meta.env.VITE_API_URL;
 
 import { Save, Camera, ArrowLeft } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
@@ -34,7 +35,7 @@ const ProfilePage = () => {
     const updateProfile = async (name, biography, pic) => {
         setLoading(true);
         try {
-            const res = await fetch("/api/users/update", {
+            const res = await fetch("${API_BASE}/api/users/update", {
                 method: "PUT",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({

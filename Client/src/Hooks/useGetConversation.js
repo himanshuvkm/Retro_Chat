@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
-
+ const API_BASE = import.meta.env.VITE_API_URL;
 const useGetConversations = () => {
   const [loading, setLoading] = useState(false);
   const [conversations, setConversations] = useState([]);
@@ -10,8 +10,8 @@ const useGetConversations = () => {
       setLoading(true);
       try {
         const [usersRes, groupsRes] = await Promise.all([
-          fetch("/api/users"),
-          fetch("/api/message/group/list/all")
+          fetch(`${API_BASE}/api/users`, { credentials: "include" }),
+          fetch(`${API_BASE}/api/message/group/list/all`, { credentials: "include" })
         ]);
 
         const usersData = await usersRes.json();

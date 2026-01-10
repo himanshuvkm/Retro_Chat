@@ -4,6 +4,7 @@ import { extractTime } from '../../utils/extracttime';
 import { Download, FileText, Pencil, Trash2, Smile } from 'lucide-react';
 import { useState } from "react";
 import toast from "react-hot-toast";
+export const API_BASE = import.meta.env.VITE_API_URL;
 
 const Message = ({ message }) => {
     const { authUser } = useAuthContext();
@@ -25,7 +26,7 @@ const Message = ({ message }) => {
 
     const handleReact = async (emoji) => {
         try {
-            const res = await fetch(`/api/message/react/${message._id}`, {
+            const res = await fetch(`${API_BASE}/api/message/react/${message._id}`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ emoji })
@@ -47,7 +48,7 @@ const Message = ({ message }) => {
 
     const handleEdit = async () => {
         try {
-            const res = await fetch(`/api/message/edit/${message._id}`, {
+            const res = await fetch(`${API_BASE}/api/message/edit/${message._id}`, {
                 method: "PUT",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ message: editContent })
@@ -71,7 +72,7 @@ const Message = ({ message }) => {
     const handleDelete = async () => {
         if (!confirm("Delete this message?")) return;
         try {
-            const res = await fetch(`/api/message/delete/${message._id}`, {
+            const res = await fetch(`${API_BASE}/api/message/delete/${message._id}`, {
                 method: "DELETE"
             });
             const data = await res.json();

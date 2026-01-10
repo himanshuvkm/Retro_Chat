@@ -7,12 +7,12 @@ import messageRoute from "./Routes/message-routes.js";
 import connecttoDb from "./DB/connecttoDb.js";
 import userRoute from "./Routes/user-route.js";
 import { app, server } from "./Socket/socket.io.js";
+import cors from "cors";
 
 dotenv.config();
-const __dirname = path.resolve();
+
 const Port = process.env.PORT || 5000;
 
-import cors from "cors";
 
 // ---------------------- Middlewares ----------------------
 app.use(express.json());

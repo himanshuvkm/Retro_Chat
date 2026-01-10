@@ -4,6 +4,7 @@ import { extractTime } from '../../utils/extracttime';
 import { Download, FileText, Pencil, Trash2, Smile } from 'lucide-react';
 import { useState } from "react";
 import toast from "react-hot-toast";
+import { getUserFriendlyError } from '../../utils/errorUtils';
 export const API_BASE = import.meta.env.VITE_API_URL;
 
 const Message = ({ message }) => {
@@ -42,7 +43,7 @@ const Message = ({ message }) => {
 
             setShowReactionPicker(false);
         } catch (error) {
-            toast.error(error.message);
+            toast.error(getUserFriendlyError(error));
         }
     };
 
@@ -65,7 +66,7 @@ const Message = ({ message }) => {
             setIsEditing(false);
             toast.success("Message edited");
         } catch (error) {
-            toast.error(error.message);
+            toast.error(getUserFriendlyError(error));
         }
     };
 
@@ -83,7 +84,7 @@ const Message = ({ message }) => {
             message.deleted = true; // Use this flag to hide it
             toast.success("Message deleted");
         } catch (error) {
-            toast.error(error.message);
+            toast.error(getUserFriendlyError(error));
         }
     };
 

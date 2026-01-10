@@ -5,6 +5,7 @@ import { Save, Camera, ArrowLeft } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
 import { useAuthContext } from '../../context/AuthContetx';
+import { getUserFriendlyError } from '../../utils/errorUtils';
 
 const ProfilePage = () => {
     const { authUser, setAuthUser } = useAuthContext();
@@ -35,8 +36,9 @@ const ProfilePage = () => {
     const updateProfile = async (name, biography, pic) => {
         setLoading(true);
         try {
-            const res = await fetch("${API_BASE}/api/users/update", {
+            const res = await fetch(`${API_BASE}/api/users/update`, {
                 method: "PUT",
+                credentials: "include",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
                     fullName: name,
@@ -48,12 +50,12 @@ const ProfilePage = () => {
             if (data.error) throw new Error(data.error);
 
             // Update Context/LocalStorage
-            localStorage.setItem("chat-user", JSON.stringify(data.data));
+            localStorage.setItem("user", JSON.stringify(data.data));
             setAuthUser(data.data);
             toast.success("Profile Updated!");
 
         } catch (error) {
-            toast.error(error.message);
+            toast.error(getUserFriendlyError(error));
         } finally {
             setLoading(false);
         }
@@ -77,11 +79,11 @@ const ProfilePage = () => {
                 </Link>
             </div>
 
-            <div className="flex-1 overflow-auto p-8 flex flex-col items-center">
+            <div className="flex-1 overflow-auto p-4 md:p-8 flex flex-col items-center">
 
                 {/* Avatar Section */}
-                <div className="relative group mb-8">
-                    <div className="w-32 h-32 rounded-full border-4 border-white shadow-lg overflow-hidden bg-white">
+                <div className="relative group mb-6 md:mb-8">
+                    <div className="w-24 h-24 md:w-32 md:h-32 rounded-full border-4 border-white shadow-lg overflow-hidden bg-white">
                         <img
                             src={authUser.profilePic || "https://avatar.iran.liara.run/public/boy"}
                             alt="Profile"

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { X, Check } from "lucide-react";
 import useGetConversations from "../../Hooks/useGetConversation";
 import { toast } from "react-hot-toast";
+import { getUserFriendlyError } from "../../utils/errorUtils";
 export const API_BASE = import.meta.env.VITE_API_URL;
 
 const CreateGroupModal = ({ onClose }) => {
@@ -30,8 +31,9 @@ const CreateGroupModal = ({ onClose }) => {
 
         setLoading(true);
         try {
-            const res = await fetch("${API_BASE}/api/message/group/create", {
+            const res = await fetch(`${API_BASE}/api/message/group/create`, {
                 method: "POST",
+                credentials: "include",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
                     groupName,
@@ -46,7 +48,7 @@ const CreateGroupModal = ({ onClose }) => {
             // In a real app, we'd trigger a refresh of conversations here
             window.location.reload();
         } catch (error) {
-            toast.error(error.message);
+            toast.error(getUserFriendlyError(error));
         } finally {
             setLoading(false);
         }
@@ -87,8 +89,8 @@ const CreateGroupModal = ({ onClose }) => {
                                         key={user._id}
                                         onClick={() => toggleUser(user._id)}
                                         className={`flex items-center gap-3 p-2 cursor-pointer mb-1 border-b border-transparent rounded-md transition-all ${selectedUsers.includes(user._id)
-                                                ? 'bg-[var(--accent-lavender)] border-[var(--window-border)] shadow-sm'
-                                                : 'hover:bg-gray-50'
+                                            ? 'bg-[var(--accent-lavender)] border-[var(--window-border)] shadow-sm'
+                                            : 'hover:bg-gray-50'
                                             }`}
                                     >
                                         <div className="w-8 h-8 rounded-full border border-gray-200 overflow-hidden bg-white">

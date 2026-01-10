@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
- const API_BASE = import.meta.env.VITE_API_URL;
+import { getUserFriendlyError } from "../utils/errorUtils";
+const API_BASE = import.meta.env.VITE_API_URL;
 const useGetConversations = () => {
   const [loading, setLoading] = useState(false);
   const [conversations, setConversations] = useState([]);
@@ -32,7 +33,7 @@ const useGetConversations = () => {
           setConversations([...normalizedGroups, ...usersData.data]);
         }
       } catch (error) {
-        toast.error("Error fetching conversations: " + error.message);
+        toast.error(getUserFriendlyError(error));
       } finally {
         setLoading(false);
       }

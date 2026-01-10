@@ -2,7 +2,8 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuthContext } from "../context/AuthContetx";
 import toast from "react-hot-toast";
- const API_BASE = import.meta.env.VITE_API_URL;
+import { getUserFriendlyError } from "../utils/errorUtils";
+const API_BASE = import.meta.env.VITE_API_URL;
 const useLogout = () => {
   const [loading, setLoading] = useState(false);
   const { setAuthUser } = useAuthContext();
@@ -32,7 +33,7 @@ const useLogout = () => {
       toast.success("Logged out successfully 👋");
       navigate("/login");
     } catch (error) {
-      toast.error(error.message || "Logout failed");
+      toast.error(getUserFriendlyError(error) || "Logout failed");
     } finally {
       setLoading(false);
     }

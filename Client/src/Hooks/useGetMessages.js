@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import useConverstation from "../zustand/useconversation";
 import { toast } from "react-hot-toast";
- const API_BASE = import.meta.env.VITE_API_URL;
+import { getUserFriendlyError } from "../utils/errorUtils";
+const API_BASE = import.meta.env.VITE_API_URL;
 const useGetMessages = () => {
     const [loading, setLoading] = useState(false);
     const { messages, setMessages, selectedConversation } = useConverstation();
@@ -18,7 +19,7 @@ const useGetMessages = () => {
                 }
                 setMessages(data.data);
             } catch (error) {
-                toast.error("Error fetching messages: " + error.message);
+                toast.error(getUserFriendlyError(error));
             } finally {
                 setLoading(false);
             }

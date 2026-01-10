@@ -1,19 +1,20 @@
 import { useState } from "react";
 import { toast } from "react-hot-toast";
 import { useAuthContext } from "../context/AuthContetx";
- const API_BASE = import.meta.env.VITE_API_URL;
+import { getUserFriendlyError } from "../utils/errorUtils";
+const API_BASE = import.meta.env.VITE_API_URL;
 const useLogin = () => {
     const [loading, setLoading] = useState(false);
-    const {setAuthUser}= useAuthContext();
+    const { setAuthUser } = useAuthContext();
 
     const login = async (username, password) => {
-         const success = handleInputErrors({
-    
-      username,
-      password,
-      
-    });
-    if (!success) return;
+        const success = handleInputErrors({
+
+            username,
+            password,
+
+        });
+        if (!success) return;
         setLoading(true);
         try {
             const response = await fetch(`${API_BASE}/api/auth/login`, {
@@ -25,16 +26,16 @@ const useLogin = () => {
                 body: JSON.stringify({ username, password }),
             });
             const data = await response.json();
-            if(data.error) {
+            if (data.error) {
                 throw new Error(data.error);
-            
+
             }
 
             localStorage.setItem("user", JSON.stringify(data.data));
             setAuthUser(data.data);
 
         } catch (error) {
-            toast.error(error.message);
+            toast.error(getUserFriendlyError(error));
         } finally {
             setLoading(false);
         }

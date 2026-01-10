@@ -1,12 +1,13 @@
 import { useState } from "react";
 import { toast } from "react-hot-toast";
 import { useAuthContext } from "../context/AuthContetx";
- const API_BASE = import.meta.env.VITE_API_URL;
+import { getUserFriendlyError } from "../utils/errorUtils";
+const API_BASE = import.meta.env.VITE_API_URL;
 
 const useSignup = () => {
   const [loading, setLoading] = useState(false);
 
-  const {authUser, setAuthUser } = useAuthContext();
+  const { authUser, setAuthUser } = useAuthContext();
 
   const signup = async ({
     fullName,
@@ -29,7 +30,7 @@ const useSignup = () => {
     try {
       const res = await fetch(`${API_BASE}/api/auth/signup`, {
         method: "POST",
-         credentials: "include",
+        credentials: "include",
         headers: {
           "Content-Type": "application/json",
         },
@@ -43,17 +44,17 @@ const useSignup = () => {
       });
       const data = await res.json();
       console.log(data);
-      if(data.error){
+      if (data.error) {
         throw new Error(data.error)
       }
       //local Storage
       localStorage.setItem("user", JSON.stringify(data.data));
       //context
       setAuthUser(data.data);
-      
+
 
     } catch (error) {
-      toast.error(error.message);
+      toast.error(getUserFriendlyError(error));
     } finally {
       setLoading(false);
     }

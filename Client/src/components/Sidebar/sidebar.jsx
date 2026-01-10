@@ -9,7 +9,7 @@ const Sidebar = () => {
 	const [isGroupModalOpen, setIsGroupModalOpen] = useState(false);
 
 	return (
-		<div className='border-r-2 border-[var(--window-border)] flex flex-col bg-[var(--window-bg)] w-80 relative'>
+		<div className='border-r-2 border-[var(--window-border)] flex flex-col bg-[var(--window-bg)] w-full md:w-80 md:min-w-[320px] relative'>
 			<SearchInput />
 			<div className="px-4 pb-2 flex justify-between items-center">
 				<span className="text-xs font-bold text-[var(--text-dim)] uppercase tracking-wider">My Contacts</span>

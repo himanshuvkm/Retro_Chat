@@ -9,6 +9,7 @@ const io = new Server(server, {
   cors: {
     origin: [
       "http://localhost:5173",
+      "https://retrochat-beta.vercel.app",
       process.env.CLIENT_URL, // MUST exist in Render env
     ],
     methods: ["GET", "POST"],

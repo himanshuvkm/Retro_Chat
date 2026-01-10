@@ -18,7 +18,7 @@ const Port = process.env.PORT || 5000;
 app.use(express.json());
 app.use(cookieParser());
 app.use(cors({
-  origin: ["http://localhost:5173", process.env.CLIENT_URL], // Allow local dev and production client
+  origin: ["http://localhost:5173", "https://retrochat-beta.vercel.app", process.env.CLIENT_URL], // Allow local dev and production client
   credentials: true
 }));
 

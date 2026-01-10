@@ -1,9 +1,10 @@
 import express from "express"
-const router = express.Router();
 import protectRoute from "../Middleware/protectRoute.js";
-import  {getUsersForSidebar} from "../controller/user-controller.js";
+import { getUsersForSidebar, updateUserProfile } from "../controller/user-controller.js";
+
+const router = express.Router();
 
 router.get("/", protectRoute, getUsersForSidebar);
-
+router.put("/update", protectRoute, updateUserProfile);
 
 export default router;

@@ -1,37 +1,119 @@
 @import "tailwindcss";
 @plugin "daisyui";
 
+:root {
+	/* Palette: Cream, Sky Blue, Mint, Coral, Lavender */
+	--desktop-bg: #e0f0ff;
+	/* Soft Sky Blue */
+	--window-bg: #fffbf0;
+	/* Creamy White */
+	--window-border: #808080;
+	/* Classic Gray Border for 3D effect */
+	--window-border-light: #ffffff;
+	--window-border-dark: #404040;
+	--header-bg: #ffc0cb;
+	/* Soft Pink header */
+	--header-text: #505050;
+
+	/* Accents */
+	--accent-peach: #ffdab9;
+	--accent-mint: #b0f0e0;
+	--accent-lavender: #e6e6fa;
+	--accent-coral: #ff7f50;
+
+	--text-main: #4a4a4a;
+	--text-dim: #888888;
+}
+
 body {
-	background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-	min-height: 100vh;
+	background-color: var(--desktop-bg);
+	/* Subtle Pattern for texture, though less visible now */
+	background-image:
+		linear-gradient(rgba(255, 255, 255, 0.4) 1px, transparent 1px),
+		linear-gradient(90deg, rgba(255, 255, 255, 0.4) 1px, transparent 1px);
+	background-size: 30px 30px;
+	color: var(--text-main);
+	font-family: 'Nunito', sans-serif;
+	font-size: 18px;
+	line-height: 1.6;
+	height: 100vh;
+	width: 100vw;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	/* Removed flex center alignment */
+}
+
+/* Scrollbar - Chunky Retro */
+::-webkit-scrollbar {
+	width: 14px;
+}
+
+::-webkit-scrollbar-track {
+	background: #dfdfdf;
+	border-left: 1px solid white;
+}
+
+::-webkit-scrollbar-thumb {
+	background-color: #c0c0c0;
+	box-shadow: inset 1px 1px white, inset -1px -1px gray;
+	border: 1px solid #808080;
+}
+
+/* Retro Window Effect (Modified for Full Screen Components) */
+.retro-window {
+	background: var(--window-bg);
+	/* Border only if needed for specific smaller windows, main app has its own structure */
+	border: 3px solid var(--window-border);
+	box-shadow:
+		8px 8px 0px rgba(0, 0, 0, 0.15),
+		inset 2px 2px 0px white,
+		inset -2px -2px 0px #c0c0c0;
+	border-radius: 8px;
+	overflow: hidden;
+}
+
+/* Full Screen Main App Container Override/New Class if needed, 
+   but we removed retro-window from the main div in App.jsx. 
+   We keep this for modals or other popups. */
+
+.window-header {
+	background: linear-gradient(90deg, #ffc0cb, #ffd1dc);
+	padding: 6px 12px;
+	border-bottom: 2px solid var(--window-border);
 	display: flex;
 	align-items: center;
-	justify-content: center;
+	justify-content: space-between;
 }
 
-@keyframes shake {
-	10%,
-	90% {
-		transform: translate3d(-1px, 0, 0);
-	}
-
-	20%,
-	80% {
-		transform: translate3d(2px, 0, 0);
-	}
-
-	30%,
-	50%,
-	70% {
-		transform: translate3d(-4px, 0, 0);
-	}
-
-	40%,
-	60% {
-		transform: translate3d(4px, 0, 0);
-	}
+.window-dots {
+	display: flex;
+	gap: 6px;
 }
 
-.shake {
-	animation: shake 0.5s;
+.dot {
+	width: 12px;
+	height: 12px;
+	border-radius: 50%;
+	border: 2px solid rgba(0, 0, 0, 0.1);
+}
+
+/* Specific component overrides */
+.glass-effect {
+	/* For overlays if needed, but going solid for retro */
+	background: rgba(255, 255, 255, 0.9);
+	backdrop-filter: blur(4px);
+}
+
+.retro-btn {
+	background: #f0f0f0;
+	border: 2px solid #808080;
+	box-shadow: inset 2px 2px white, inset -2px -2px gray;
+	cursor: pointer;
+	transition: transform 0.1s;
+}
+
+.retro-btn:active {
+	box-shadow: inset 2px 2px gray, inset -2px -2px white;
+	transform: translateY(2px);
 }

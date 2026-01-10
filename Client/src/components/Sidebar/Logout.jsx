@@ -1,27 +1,25 @@
 import React from "react";
+import { BiLogOut } from "react-icons/bi";
+import { User } from "lucide-react";
 import useLogout from "../../Hooks/uselogout";
-import { LogOut } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const LogoutButton = () => {
   const { loading, logout } = useLogout();
 
   return (
-    <div className="mt-auto pt-4 border-t border-gray-200">
-      <button
-        onClick={logout}
-        disabled={loading}
-        className="flex items-center justify-center w-full py-2.5 px-4 text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-lg transition-colors"
-        aria-label="Logout"
-      >
-        {!loading ? (
-          <>
-            <LogOut className="w-5 h-5 mr-2" />
-            <span className="text-sm font-medium">Logout</span>
-          </>
-        ) : (
-          <span className="w-5 h-5 border-2 border-t-transparent border-gray-400 rounded-full animate-spin"></span>
-        )}
-      </button>
+    <div className='mt-auto p-4 border-t-2 border-[var(--window-border)] flex justify-between items-center bg-[var(--window-bg)]'>
+      <Link to="/profile" className="text-[var(--text-main)] hover:text-[var(--accent-coral)] transition-colors p-2 hover:bg-white rounded-full">
+        <User size={24} />
+      </Link>
+      {!loading ? (
+        <BiLogOut
+          className='w-6 h-6 text-[var(--text-main)] hover:text-red-500 cursor-pointer transition-colors'
+          onClick={logout}
+        />
+      ) : (
+        <span className='loading loading-spinner'></span>
+      )}
     </div>
   );
 };

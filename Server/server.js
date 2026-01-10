@@ -14,23 +14,22 @@ dotenv.config();
 const Port = process.env.PORT || 5000;
 
 
-// ---------------------- Middlewares ----------------------
 app.use(express.json());
 app.use(cookieParser());
 app.use(cors({
-  origin: ["http://localhost:5173", "https://retrochat-beta.vercel.app", process.env.CLIENT_URL], // Allow local dev and production client
-  credentials: true
+  origin: ["http://localhost:5173", "https://retrochat-beta.vercel.app", process.env.CLIENT_URL], 
+  credentials: true,
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"]
 }));
+app.options("*", cors());
 
-// ---------------------- DB Connect -----------------------
 connecttoDb();
 
-// ---------------------- API Routes -----------------------
 app.use("/api/auth", authRoute);
 app.use("/api/message", messageRoute);
 app.use("/api/users", userRoute);
 
-// ---------------------- Start Server ---------------------
 server.listen(Port, () => {
   console.log(`🚀 Server is running on port ${Port}`);
 });

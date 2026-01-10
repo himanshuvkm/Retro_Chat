@@ -18,7 +18,7 @@ export const SocketContextProvider = ({ children }) => {
   useEffect(() => {
     if (authUser) {
       // If user is logged in, connect to backend socket server
-      const newSocket = io("https://chatapplication-8385.onrender.com", {
+      const newSocket = io(import.meta.env.VITE_API_URL || "https://chatapplication-8385.onrender.com", {
         query: { userId: authUser._id }, // Pass userId in handshake query
       });
 
@@ -40,7 +40,7 @@ export const SocketContextProvider = ({ children }) => {
         setSocket(null);
       }
     }
-  }, [authUser]); 
+  }, [authUser]);
   // Effect runs whenever `authUser` changes (login/logout)
 
   return (

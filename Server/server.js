@@ -24,18 +24,6 @@ app.use("/api/auth", authRoute);
 app.use("/api/message", messageRoute);
 app.use("/api/users", userRoute);
 
-// ---------------------- Serve Frontend -------------------
-const frontendPath = path.join(__dirname, "Client/dist");
-app.use(express.static(frontendPath));
-
-// ✅ Fallback for React Router (only non-API requests)
-app.use((req, res, next) => {
-  if (req.path.startsWith("/api")) {
-    return next(); // API requests → Express handle karega
-  }
-  res.sendFile(path.join(frontendPath, "index.html"));
-});
-
 // ---------------------- Start Server ---------------------
 server.listen(Port, () => {
   console.log(`🚀 Server is running on port ${Port}`);

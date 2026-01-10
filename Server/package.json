@@ -4,10 +4,10 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "dev": "nodemon Server/server.js",
-    "start": "node Server/server.js",
+    "dev": "nodemon server.js",
+    "start": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "npm install && npm install --prefix Client && npm run build --prefix Client"
+    "build": "npm install"
   },
   "type": "module",
   "repository": {

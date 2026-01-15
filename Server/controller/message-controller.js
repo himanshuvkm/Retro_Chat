@@ -1,6 +1,6 @@
 import Conversation from "../Models/conversation-model.js"
 import Message from "../Models/mssg-model.js"
-import { getReceiverSocketId  } from "../Socket/socketHandlers.js";
+import { getReceiverSocketId } from "../Socket/socketHandlers.js";
 import { io } from "../Socket/socket.io.js";
 
 
@@ -99,7 +99,7 @@ export const createGroup = async (req, res) => {
 
 export const getGroupMessages = async (req, res) => {
     try {
-        const { id: groupId } = req.params;
+        const { groupId } = req.params;
 
         // Check if user is participant? (Optional for security)
         const conversation = await Conversation.findById(groupId).populate("messages");
@@ -119,7 +119,7 @@ export const getGroupMessages = async (req, res) => {
 export const sendGroupMessage = async (req, res) => {
     try {
         const { message, type, fileUrl } = req.body;
-        const { id: groupId } = req.params;
+        const { groupId } = req.params;
         const senderId = req.user._id;
 
         let conversation = await Conversation.findById(groupId);

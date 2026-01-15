@@ -57,7 +57,7 @@ const MessageContainer = () => {
               <div className="flex flex-col">
                 <div className="text-[10px] text-gray-500 font-bold uppercase tracking-widest">Chatting With</div>
                 <div className="text-[var(--text-main)] font-bold text-lg leading-tight flex items-center gap-2">
-                  {selectedConversation?.fullName}
+                  <span className="truncate max-w-[150px] md:max-w-md">{selectedConversation?.fullName}</span>
                   {isTyping && <span className="text-xs text-[var(--accent-coral)] animate-pulse italic lowercase">is typing...</span>}
                 </div>
               </div>

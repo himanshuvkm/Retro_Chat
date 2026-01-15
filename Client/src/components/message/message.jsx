@@ -30,6 +30,7 @@ const Message = ({ message }) => {
             const res = await fetch(`${API_BASE}/api/message/react/${message._id}`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
+                credentials: "include",
                 body: JSON.stringify({ emoji })
             });
             const data = await res.json();
@@ -52,6 +53,7 @@ const Message = ({ message }) => {
             const res = await fetch(`${API_BASE}/api/message/edit/${message._id}`, {
                 method: "PUT",
                 headers: { "Content-Type": "application/json" },
+                credentials: "include",
                 body: JSON.stringify({ message: editContent })
             });
             const data = await res.json();
@@ -74,7 +76,8 @@ const Message = ({ message }) => {
         if (!confirm("Delete this message?")) return;
         try {
             const res = await fetch(`${API_BASE}/api/message/delete/${message._id}`, {
-                method: "DELETE"
+                method: "DELETE",
+                credentials: "include"
             });
             const data = await res.json();
             if (data.error) throw new Error(data.error);

@@ -10,7 +10,7 @@ import ProfilePage from './components/Profile/ProfilePage';
 function App() {
   const { authUser } = useAuthContext();
   return (
-    <div className='w-full h-screen flex flex-col font-nunito bg-[var(--window-bg)] overflow-hidden'>
+    <div className='w-full h-screen h-[100dvh] flex flex-col font-nunito bg-[var(--window-bg)] overflow-hidden'>
       {/* Window Header - Full Width */}
       <div className="window-header h-10 flex-shrink-0">
         <div className="flex items-center gap-2">
